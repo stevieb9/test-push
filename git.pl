@@ -8,7 +8,7 @@ sub git_release {
     die("git_release_commit() requires a version sent in") if ! defined $version;
 
     print "Committing release candidate...\n";
-    
+
     my $commit_exit = system("git commit -am 'Release $version candidate'");
 
     die("Git commit failed... needs intervention...") if $commit_exit != 0;
@@ -24,16 +24,20 @@ sub git_release {
 
         local $SIG{INT} = sub { $continue = 1; };
 
-        my @spinner = qw(-- \ | / | \ / --);
+        #my @spinner = qw(-- \ | / | \ / --);
 
-        while (! $continue) {
-            `clear`;
-            for (0..$#spinner) {
-                print $spinner[$_];
-                `clear`;
-            }
-        }
 
-        print "Done!\n";
+
     }
+}
+my @whirley = map chr, qw/32 176 177 178 219 178 177 176/;
+while (1) {
+    sleep 1;
+    print STDERR "please wait : ".whirley()."\r";
+}
+
+my $WHIRLEY_COUNT;
+sub whirley {
+    $WHIRLEY_COUNT = 0 if ++$WHIRLEY_COUNT == @whirley;
+    return $whirley[$WHIRLEY_COUNT];
 }
