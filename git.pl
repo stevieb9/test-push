@@ -31,6 +31,8 @@ sub git_release {
 
     my $commit_exit = system("git commit -am 'Release $version candidate'");
 
+    print "commit: $commit_exit\n";
+
     die("Git commit failed... needs intervention...") if $commit_exit != 0;
 
     print "Pushing release candidate to Github...\n";
