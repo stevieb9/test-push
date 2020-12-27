@@ -27,8 +27,8 @@ sub git_release {
         my @spinner = qw(-- \ | / | \ / --);
 
         while (! $continue) {
-            for (0..$#spinner) {
                 `clear`;
+            for (0..$#spinner) {
                 print $spinner[$_];
             }
         }
