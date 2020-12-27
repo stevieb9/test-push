@@ -27,7 +27,7 @@ sub git_release {
     my ($version) = @_;
     die("git_release_commit() requires a version sent in") if ! defined $version;
 
-    print "Committing release candidate...\n";
+    print "\nCommitting release candidate...\n";
 
     my $commit_exit = system("git commit -am 'Release $version candidate'");
 
@@ -41,7 +41,8 @@ sub git_release {
             die("Git commit failed... needs intervention...") if $commit_exit != 0;
         }
     }
-    print "Pushing release candidate to Github...\n";
+
+    print "\nPushing release candidate to Github...\n";
 
     my $push_exit = system("git", "push");
 
@@ -60,4 +61,3 @@ sub git_release {
 #
 #    }
 }
-
