@@ -15,7 +15,7 @@ sub git_release {
 
     print "Pushing release candidate to Github...\n";
 
-    my $push_exit = system("git push -am 'Release $version candidate'");
+    my $push_exit = system("git push 'Release $version candidate'");
 
     die("Git push failed... needs intervention...") if $push_exit != 0;
 
@@ -35,4 +35,3 @@ sub git_release {
         print "Done!\n";
     }
 }
-
