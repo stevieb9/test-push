@@ -28,6 +28,7 @@ sub git_release {
 
         while (! $continue) {
             for (0..$#spinner) {
+                `clear`;
                 print $spinner[$_];
             }
         }
