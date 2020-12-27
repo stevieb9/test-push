@@ -33,14 +33,19 @@ sub git_release {
 
     print "commit: $commit_exit\n";
 
-    if ($commit_exit == 256) {
-        print "\nNothing to commit, proceeding...\n";
+    if ($commit_exit != 0) {
+        if ($commit_exit == 256) {
+            print "\nNothing to commit, proceeding...\n";
+        }
+        else {
+            die("Git commit failed... needs intervention...") if $commit_exit != 0;
+        }
     }
-    die("Git commit failed... needs intervention...") if $commit_exit != 0;
-
     print "Pushing release candidate to Github...\n";
 
     my $push_exit = system("git", "push");
+
+    print "push: $push_exit\n";
 
     die("Git push failed... needs intervention...") if $push_exit != 0;
 
