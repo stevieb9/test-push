@@ -1,6 +1,26 @@
 use warnings;
 use strict;
 
+my $spinner_total = 20;
+my $spinner_count = 0;
+
+#while (1) {
+#    spinner("Performing 'git push'");
+#}
+
+sub spinner {
+    my ($msg) = @_;
+
+    die("spinner() needs a message sent in") if ! $msg;
+
+    my $num = $spinner_total - $spinner_count;
+    my $spinner = '.' x $spinner_count . ' ' x $num;
+    $spinner_count++;
+    $spinner_count = 0 if $spinner_count == $spinner_total;
+    print STDERR "$msg: $spinner\r";
+    select(undef, undef, undef, 0.1);
+}
+
 git_release('1.00');
 
 sub git_release {
@@ -19,25 +39,15 @@ sub git_release {
 
     die("Git push failed... needs intervention...") if $push_exit != 0;
 
-    {
-        my $continue = 0;
-
-        local $SIG{INT} = sub { $continue = 1; };
-
-        #my @spinner = qw(-- \ | / | \ / --);
-
-
-
-    }
-}
-my @whirley = map chr, qw/32 176 177 178 219 178 177 176/;
-while (1) {
-    sleep 1;
-    print STDERR "please wait : ".whirley()."\r";
+#    {
+#        my $continue = 0;
+#
+#        local $SIG{INT} = sub { $continue = 1; };
+#
+#        #my @spinner = qw(-- \ | / | \ / --);
+#
+#
+#
+#    }
 }
 
-my $WHIRLEY_COUNT;
-sub whirley {
-    $WHIRLEY_COUNT = 0 if ++$WHIRLEY_COUNT == @whirley;
-    return $whirley[$WHIRLEY_COUNT];
-}
