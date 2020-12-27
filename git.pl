@@ -1,6 +1,7 @@
 use warnings;
 use strict;
 
+use Carp;
 my $spinner_total = 20;
 my $spinner_count = 0;
 
@@ -38,7 +39,7 @@ sub git_release {
             print "\nNothing to commit, proceeding...\n";
         }
         else {
-            die("Git commit failed... needs intervention...") if $commit_exit != 0;
+            croak("Git commit failed... needs intervention...") if $commit_exit != 0;
         }
     }
 
@@ -46,9 +47,7 @@ sub git_release {
 
     my $push_exit = system("git", "push");
 
-    print "push: $push_exit\n";
-
-    die("Git push failed... needs intervention...") if $push_exit != 0;
+    croak("Git push failed... needs intervention...") if $push_exit != 0;
 
 #    {
 #        my $continue = 0;
