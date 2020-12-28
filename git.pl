@@ -5,9 +5,9 @@ use Carp;
 my $spinner_total = 20;
 my $spinner_count = 0;
 
-#while (1) {
-#    spinner("Performing 'git push'");
-#}
+while (1) {
+    spinner("Performing 'git push'");
+}
 
 sub spinner {
     my ($msg) = @_;
